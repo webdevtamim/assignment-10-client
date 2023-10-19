@@ -7,7 +7,11 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
+        'head-bg': "url('assets/header-bg.jpg')",
         'foot-bg': "url('assets/footer-bg.png')",
+      },
+      fontFamily: {
+        lobster: "'Lobster Two', sans-serif",
       }
     },
   },

@@ -7,7 +7,7 @@ const Footer = () => {
 
     return (
         <div>
-            <div className="bg-foot-bg bg-no-repeat bg-cover pt-20 pb-16">
+            <div className="bg-foot-bg bg-no-repeat bg-cover pt-20 pb-16 px-5">
                 <div className="max-w-[1400px] m-auto">
                     <div className="flex justify-center items-center">
                         <span className="text-[#eb0029] lg:text-5xl text-4xl font-semibold pl-3 pr-2">BRAND </span>
@@ -24,7 +24,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-[#eb0029] pt-4 pb-4">
+            <div className="bg-[#eb0029] pt-4 pb-4 px-5">
                 <p className="text-xs font-medium text-white font-oswald text-center tracking-widest">COPYRIGHT VICTORY.GG ALL RIGHT RESERVED</p>
             </div>
         </div>

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Lobster+Two&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,4 +18,9 @@ body {
 .active:active {
     color: #eb0029 !important;
     background: transparent !important;
+}
+
+#special-text {
+    background: url('/public/special.jpg') repeat;
+    -webkit-background-clip: text;
 }

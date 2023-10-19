@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Error from './components/Error/Error.jsx'
+import Home from './components/Home/Home.jsx'
 import './index.css'
 import {
   createBrowserRouter,
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h2>Home</h2>
+        element: <Home></Home>
       },
       {
         path: '/addProduct',
