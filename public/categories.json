@@ -1,0 +1,56 @@
+[
+    {
+      "id": 1,
+      "photo": "https://i.ibb.co/CzMhVHm/a.png",
+      "name": "PepsiCo",
+      "route": "pepsico",
+      "slider1": "https://i.ibb.co/2Wt3qv0/for-use-pepsico-dotcom-only-nov2021-8.jpg",
+      "slider2": "https://i.ibb.co/4YfVRqX/missionvision-hero-pepsico-edits-x-winter-shoot-nov-2021-31.jpg",
+      "slider3": "https://i.ibb.co/p29WgZF/about-1-dsc01560.jpg"
+    },
+    {
+      "id": 2,
+      "photo": "https://i.ibb.co/PGCnKcX/b.png",
+      "name": "Nestlé",
+      "route": "nestle",
+      "slider1": "https://i.ibb.co/YPKW7jX/Nescafe-Iced-Frappe.jpg",
+      "slider2": "https://i.ibb.co/7CXRYKv/MAGGI-Tomyum-Banner-1479-x-688-2-0.jpg",
+      "slider3": "https://i.ibb.co/G7q9Dxq/orgain-innovation-highlight.jpg"
+    },
+    {
+      "id": 3,
+      "photo": "https://i.ibb.co/CvTkyDk/c.png",
+      "name": "Coca-Cola",
+      "route": "cocacola",
+      "slider1": "https://i.ibb.co/ThKP8x2/fgdfgd.jpg",
+      "slider2": "https://i.ibb.co/W5YX75J/width1960-2.jpg",
+      "slider3": "https://i.ibb.co/hCxzkfq/width1960.jpg"
+    },
+    {
+      "id": 4,
+      "photo": "https://i.ibb.co/cFmJJqf/d.png",
+      "name": "McDonald's",
+      "route": "mcdonalds",
+      "slider1": "https://i.ibb.co/KNcV7j1/1pub-10pc-Mc-Nuggets-2336x1040.jpg",
+      "slider2": "https://i.ibb.co/yXs5n6p/1-PUB-Desktop-Deals-v1-1168x520.jpg",
+      "slider3": "https://i.ibb.co/DLG4dqy/1-PUB-Sauces-2336x1040.jpg"
+    },
+    {
+      "id": 5,
+      "photo": "https://i.ibb.co/0Bcz11f/e.png",
+      "name": "Starbucks",
+      "route": "starbucks",
+      "slider1": "https://i.ibb.co/y0kPNgk/starbucks3.jpg",
+      "slider2": "https://i.ibb.co/g6W32My/starbucks1.jpg",
+      "slider3": "https://i.ibb.co/wc81fN2/starbucks2.jpg"
+    },
+    {
+      "id": 6,
+      "photo": "https://i.ibb.co/qCCvT51/f.png",
+      "name": "Kellogg's",
+      "route": "kelloggs",
+      "slider1": "https://i.ibb.co/b57xb9M/kelloggs1.png",
+      "slider2": "https://i.ibb.co/NxXMvGw/kelloggs2.png",
+      "slider3": "https://i.ibb.co/7Q4H8fJ/kelloggs3.png"
+    }
+  ]
