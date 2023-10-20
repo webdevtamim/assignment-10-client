@@ -1,6 +1,7 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Products from "../Products/Products";
 
 const Category = () => {
     const categories = useLoaderData();
@@ -10,7 +11,6 @@ const Category = () => {
     const { name, slider1, slider2, slider3 } = category;
 
     const sliders = [slider1, slider2, slider3]
-    console.log(sliders);
 
     return (
         <div>
@@ -27,6 +27,7 @@ const Category = () => {
                     </div>)
                 }
             </Carousel>
+            <Products brandName={brandName}></Products>
         </div>
     );
 };

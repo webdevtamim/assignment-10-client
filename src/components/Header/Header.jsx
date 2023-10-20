@@ -26,7 +26,7 @@ const Header = () => {
     const listLinks = ['/', '/addProduct', '/myCart']
 
     return (
-        <div>
+        <div className=''>
             <div className='bg-[#eb0029] px-5 py-1'>
                 <div className='max-w-[1440px] mx-auto'>
                     <div className='flex justify-between text-white'>
@@ -45,7 +45,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <div className=''>
+            <div className='shadow-lg'>
                 <div className='max-w-[1440px] flex mx-auto justify-center'>
                     <div className='lg:w-[15%] md:w-[25%] sm:w-[30%] w-[40%] flex'>
                         <Link to={''} className='px-5 py-3 flex items-center'>

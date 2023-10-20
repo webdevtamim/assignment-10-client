@@ -6,7 +6,7 @@ const Footer = () => {
     }
 
     return (
-        <div>
+        <div className="bg-[#0E1317] text-white">
             <div className="bg-foot-bg bg-no-repeat bg-cover pt-20 pb-16 px-5">
                 <div className="max-w-[1400px] m-auto">
                     <div className="flex justify-center items-center">

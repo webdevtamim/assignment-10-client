@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Error from './components/Error/Error.jsx'
 import Home from './components/Home/Home.jsx'
+import AddProduct from './components/AddProduct/AddProduct.jsx'
 import Category from './components/Category/Category.jsx'
 import './index.css'
 import {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    loader: () => fetch('http://localhost:5000/products'),
     errorElement: <Error></Error>,
     children: [
       {
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/addProduct',
-        element: <h2>Add Product</h2>
+        element: <AddProduct></AddProduct>
       },
       {
         path: '/myCart',
