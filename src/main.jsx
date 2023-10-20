@@ -5,6 +5,8 @@ import Error from './components/Error/Error.jsx'
 import Home from './components/Home/Home.jsx'
 import AddProduct from './components/AddProduct/AddProduct.jsx'
 import Category from './components/Category/Category.jsx'
+import Register from './components/Register/Register.jsx'
+import AuthProvider from './providers/AuthProvider.jsx'
 import './index.css'
 import {
   createBrowserRouter,
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/register',
-        element: <h2>Register</h2>
+        element: <Register></Register>
       },
       {
         path: '/login',
@@ -49,6 +51,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
