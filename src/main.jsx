@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Error from './components/Error/Error.jsx'
 import Home from './components/Home/Home.jsx'
+import Category from './components/Category/Category.jsx'
 import './index.css'
 import {
   createBrowserRouter,
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <h2>Login</h2>
+      },
+      {
+        path: '/category/:brandName',
+        element: <Category></Category>,
+        loader: () => fetch('../categories.json')
       },
     ]
   },
