@@ -1,9 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import sliderimg1 from '../../assets/mcdonalds1.jpg';
-import sliderimg2 from '../../assets/mcdonalds2.jpg';
-import sliderimg3 from '../../assets/mcdonalds3.jpg';
 
 const Category = () => {
     const categories = useLoaderData();
