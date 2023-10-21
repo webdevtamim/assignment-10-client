@@ -35,25 +35,29 @@ const AddProduct = () => {
             },
             body: JSON.stringify(prodObj)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.insertedId){
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Product added successfully',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                  })
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Product added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                }
+            })
     }
 
     return (
-        <div>
-            <div className="my-20 p-10 border lg:max-w-[80%] mx-auto shadow-lg">
+        <div className="px-5">
+            <div className="pt-20 pb-2 mb-16 lg:max-w-[80%] mx-auto space-x-5">
+                <span className="text-[#E2012D] md:text-5xl text-4xl font-semibold">BRAND SHOP</span>
+                <span className="md:text-5xl text-4xl font-semibold">Add Product</span>
+            </div>
+            <div className="mb-20 p-10 border lg:max-w-[80%] mx-auto shadow-lg">
                 <form onSubmit={handleAddProduct}>
-                    <div className="grid grid-cols-2 gap-10">
+                    <div className="grid md:grid-cols-2 md:gap-10">
                         <div>
                             <label className="text-xs font-semibold tracking-widest" htmlFor="photo">Product Photo</label><br />
                             <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="url" name="photo" id="photo" placeholder="URL" required />
@@ -64,7 +68,7 @@ const AddProduct = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-10">
+                    <div className="grid md:grid-cols-2 md:gap-10">
                         <div>
                             <label className="text-xs font-semibold tracking-widest" htmlFor="types">Product Type</label><br />
                             <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="text" name="types" id="types" placeholder="Product Type" required />
@@ -75,7 +79,7 @@ const AddProduct = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-10">
+                    <div className="grid md:grid-cols-2 md:gap-10 mb-5 md:mb-0">
                         <div>
                             <label className="text-xs font-semibold tracking-widest">Brand Name</label>
                             <select
@@ -94,7 +98,7 @@ const AddProduct = () => {
                             </select>
                         </div>
                         <div className="flex items-center">
-                            <div className="rating rating-lg space-x-2">
+                            <div className="rating md:rating-lg rating-md space-x-2">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <input
                                         key={star}

@@ -8,11 +8,10 @@ import Category from './components/Category/Category.jsx'
 import Register from './components/Register/Register.jsx'
 import AuthProvider from './providers/AuthProvider.jsx'
 import Login from './components/Login/Login.jsx'
+import PrivateRoute from './routes/PrivateRoute.jsx'
 import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 
 const router = createBrowserRouter([
   {
@@ -27,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/addProduct',
-        element: <AddProduct></AddProduct>
+        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
       },
       {
         path: '/myCart',

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from 'react-icons/fa';
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -11,20 +11,22 @@ const auth = getAuth(app);
 
 const Register = () => {
     const { createUser } = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate()
 
     const provider = new GoogleAuthProvider();
 
     const handleGoogleRegister = () => {
 
         signInWithPopup(auth, provider)
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
                 Swal.fire({
                     title: 'Success!',
                     text: 'User created successfully',
                     icon: 'success',
                     confirmButtonText: 'Cool'
                 })
+                navigate(location?.state ? location.state : '/');
             })
             .catch(error => {
                 Swal.fire({
@@ -52,6 +54,7 @@ const Register = () => {
                     icon: 'success',
                     confirmButtonText: 'Cool'
                 })
+                navigate(location?.state ? location.state : '/');
             })
             .catch(error => {
                 Swal.fire({
