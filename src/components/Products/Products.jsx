@@ -1,19 +1,22 @@
-import { useContext } from "react";
-import { AssetContext } from "../../App";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Products = (brandName) => {
     const brand = brandName.brandName;
+    const [products, setProducts] = useState([]);
 
-    const products = useContext(AssetContext);
+    useEffect(() => {
+        fetch('http://localhost:5000/products')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [])
 
-    const product = products.filter(data => data.selectedBrand === brand);
-    console.log(product);
+    const brandProducts = products.filter(data => data.selectedBrand === brand);
 
     return (
         <div className="grid lg:grid-cols-4 md:grid-cols-2 max-w-[1400px] gap-5 mx-auto px-5 pt-20 pb-40">
             {
-                products.map(product => <div className="card shadow-2xl bg-white text-[#010F1C]">
+                brandProducts.map(product => <div className="card shadow-2xl bg-white text-[#010F1C]">
                     <figure className="pt-10"><img src={product.photo} alt="" /></figure>
                     <div className="card-body space-y-1">
                         <div className="flex justify-between">

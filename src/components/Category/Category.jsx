@@ -7,7 +7,7 @@ const Category = () => {
     const categories = useLoaderData();
     const { brandName } = useParams();
 
-    const category = categories.find(categoryBrand => categoryBrand.route == brandName);
+    const category = categories.find(categoryBrand => categoryBrand.name == brandName);
     const { name, slider1, slider2, slider3 } = category;
 
     const sliders = [slider1, slider2, slider3]

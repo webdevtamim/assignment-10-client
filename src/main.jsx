@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <Login></Login>
       },
       {
-        path: '/category/:brandName',
+        path: '/:brandName',
         element: <Category></Category>,
         loader: () => fetch('../categories.json')
       },

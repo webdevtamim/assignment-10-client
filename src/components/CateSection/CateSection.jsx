@@ -19,10 +19,11 @@ const CateSection = () => {
             <div className="grid lg:grid-cols-6 grid-cols-3 lg:max-w-full md:max-w-[500px] mx-auto gap-y-5">
                 {
                     categories.map(category => <div
+                        key={category.id}
                         className="grid justify-center gap-4 px-8 border border-dashed border-x-[#010f1c] border-transparent content-end"
                     >
                         <img className="w-full mx-auto" src={category.photo} alt="" />
-                        <Link to={`category/${category.route}`}>
+                        <Link to={category.name}>
                             <h6 className="font-semibold text-center hover:text-[#eb0029] duration-500">{category.name}</h6>
                         </Link>
                     </div>)
