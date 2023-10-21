@@ -43,8 +43,7 @@ const Login = () => {
         const password = form.get('password');
 
         logIn(email, password)
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
                 Swal.fire({
                     title: 'Success!',
                     text: 'User login successfully',
@@ -90,15 +89,15 @@ const Login = () => {
                         {
                             formDataSheet.map(formData => <div key={formData.id}>
                                 <label className="text-xs tracking-widest" htmlFor={formData.type}>{formData.placeholder}</label><br />
-                                <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type={formData.type} name={formData.type} id={formData.type} placeholder={formData.placeholder} required />
+                                <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type={formData.type} name={formData.type} id={formData.type} placeholder={formData.placeholder} />
                                 <br />
                             </div>)
                         }
-                        <input className="w-full bg-[#E2012D] font-semibold tracking-widest text-xs mt-4 py-3 text-white rounded-xl hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="Login" />
+                        <input className="btn w-full bg-[#E2012D] font-semibold tracking-widest text-xs mt-4 py-3 text-white rounded-xl hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="Login" />
                     </form>
                     <div className='flex'>
                         <div className='border-b-2  w-[45%]'></div>
-                        <p className="text-white text-center w-[10%] -mb-2  pt-5">OR</p>
+                        <p className="text-center w-[10%] -mb-2  pt-5">OR</p>
                         <div className='border-b-2  w-[45%]'></div>
                     </div>
                     <div className="flex justify-center pt-10">
@@ -109,7 +108,7 @@ const Login = () => {
                             <FaGoogle className='inline'></FaGoogle>
                         </button>
                     </div>
-                    <p className="text-white pt-4">New to this website? Please <Link to={'/register'}><span className="hover:underline underline-offset-4 font-bold">Register</span></Link></p>
+                    <p className="pt-4">New to this website? Please <Link to={'/register'}><span className="hover:underline underline-offset-4 font-bold">Register</span></Link></p>
                 </div>
             </div>
         </div>

@@ -3,20 +3,32 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaAlignRight } from 'react-icons/f
 import { BsArrowRight } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Header = () => {
+
+    // sign out 
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleSignOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
+
+    // mood of theme 
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
 
     const handleToggle = e => {
-        if(e.target.checked) {
+        if (e.target.checked) {
             setTheme('black');
         } else {
             setTheme('light');
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
         localStorage.setItem('theme', theme);
         const localTheme = localStorage.getItem('theme');
         document.querySelector('html').setAttribute('data-theme', localTheme)
@@ -90,12 +102,39 @@ const Header = () => {
                             </ul>
                         </div>
                         <div>
-                            <Link to={'register'}>
-                                <button className='text-white duration-500 bg-[#eb0029] hover:bg-white hover:text-[#010f1c] rounded-sm md:px-10 px-5 py-3 font-medium flex items-center gap-2'>
-                                    <span>Register</span>
-                                    <BsArrowRight></BsArrowRight>
-                                </button>
-                            </Link>
+                            {
+                                user ? (
+                                    <div className="dropdown dropdown-bottom dropdown-end">
+                                        <div tabIndex={0} className="w-10 mb-2 cursor-pointer">
+                                            {
+                                                user.photoURL ? (
+                                                    <img className="rounded-full" src={user.photoURL} alt="Profile" />
+                                                ) : (
+                                                    <img className="rounded-full" src="avatar.png" alt="Profile" />
+                                                )
+                                            }
+                                        </div>
+                                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-3 shadow bg-white rounded-lg text-right font-semibold space-y-1">
+                                            {
+                                                user.displayName ? (
+                                                    <li className='text-[#010f1c] text-center'>{user.displayName}</li>
+                                                ) : (
+                                                    <li className='text-[#010f1c] text-center'>User Name</li>
+                                                )
+                                            }
+                                            <li className='text-[#010f1c] pb-1 text-center'>{user.email}</li>
+                                            <li><button className='bg-[#eb0029] text-white text-xs hover:text-white hover:bg-[#010f1c] w-full active:scale-90 justify-center' onClick={handleSignOut}>SIGN OUT</button></li>
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    <Link to={'register'}>
+                                        <button className='text-white duration-500 bg-[#eb0029] hover:bg-white hover:text-[#010f1c] rounded-sm md:px-10 px-5 py-3 font-medium flex items-center gap-2'>
+                                            <span>Register</span>
+                                            <BsArrowRight></BsArrowRight>
+                                        </button>
+                                    </Link>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

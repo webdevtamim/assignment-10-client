@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import Swal from 'sweetalert2'
 
@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const createUser = (email, password) => {
+    const createUser = (email, password, displayName, photoURL) => {
         setLoading(true)
         if (password.length < 6) {
             Swal.fire({
@@ -41,6 +41,13 @@ const AuthProvider = ({ children }) => {
             return;
         }
         return createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                updateProfile(user, {
+                    displayName: displayName,
+                    photoURL: photoURL,
+                })
+            })
     }
 
     const logIn = (email, password) => {
@@ -48,11 +55,27 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
+    }
+
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentuser => {
+            setUser(currentuser);
+            setLoading(false);
+        });
+        return () => {
+            unSubscribe();
+        }
+    }, [])
+
     const userInfo = {
         user,
         loading,
         createUser,
-        logIn
+        logIn,
+        logOut
     }
 
     return (
