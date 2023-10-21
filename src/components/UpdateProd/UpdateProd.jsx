@@ -1,9 +1,12 @@
 import { useState } from "react";
-import Swal from 'sweetalert2'
+import { useLoaderData } from "react-router-dom";
 
-const AddProduct = () => {
-    const [selectedBrand, setSelectedBrand] = useState('');
-    const [rating, setRating] = useState(0);
+const UpdateProd = () => {
+    const updateProduct = useLoaderData();
+    const { _id, photo, name, types, price, selectedBrand, rating, description } = updateProduct;
+
+    const [getselectedBrand, setSelectedBrand] = useState('');
+    const [getrating, setRating] = useState(0);
 
     const handleSelectChange = (event) => {
         setSelectedBrand(event.target.value);
@@ -14,7 +17,7 @@ const AddProduct = () => {
         setRating(selectedRating);
     };
 
-    const handleAddProduct = event => {
+    const handleUpdateProduct = event => {
         event.preventDefault();
 
         const form = event.target;
@@ -24,16 +27,14 @@ const AddProduct = () => {
         const price = form.price.value;
         const description = form.description.value;
 
-        const prodObj = { photo, name, types, price, selectedBrand, rating, description }
+        const updatedprodObj = { photo, name, types, price, getselectedBrand, getrating, description }
 
-        console.log(prodObj);
-
-        fetch('http://localhost:5000/products', {
-            method: 'POST',
+        fetch(`http://localhost:5000/products/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(prodObj)
+            body: JSON.stringify(updatedprodObj)
         })
             .then(res => res.json())
             .then(data => {
@@ -41,7 +42,7 @@ const AddProduct = () => {
                 if (data.insertedId) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Product added successfully',
+                        text: 'Product updated successfully',
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     })
@@ -53,29 +54,29 @@ const AddProduct = () => {
         <div className="px-5">
             <div className="pt-20 pb-2 mb-16 lg:max-w-[80%] mx-auto space-x-5">
                 <span className="text-[#E2012D] md:text-5xl text-4xl font-semibold">BRAND SHOP</span>
-                <span className="md:text-5xl text-4xl font-semibold">Add Product</span>
+                <span className="md:text-5xl text-4xl font-semibold">Update Product</span>
             </div>
             <div className="mb-20 p-10 border lg:max-w-[80%] mx-auto shadow-lg">
-                <form onSubmit={handleAddProduct}>
+                <form onSubmit={handleUpdateProduct}>
                     <div className="grid md:grid-cols-2 md:gap-10">
                         <div>
                             <label className="text-xs font-semibold tracking-widest" htmlFor="photo">Product Photo</label><br />
-                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="url" name="photo" id="photo" placeholder="URL" required />
+                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="url" name="photo" defaultValue={photo} id="photo" placeholder="URL" required />
                         </div>
                         <div>
                             <label className="text-xs font-semibold tracking-widest" htmlFor="name">Product Name</label><br />
-                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="text" name="name" id="name" placeholder="Product Name" required />
+                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="text" name="name" defaultValue={name} id="name" placeholder="Product Name" required />
                         </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 md:gap-10">
                         <div>
                             <label className="text-xs font-semibold tracking-widest" htmlFor="types">Product Type</label><br />
-                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="text" name="types" id="types" placeholder="Product Type" required />
+                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="text" name="types" defaultValue={types} id="types" placeholder="Product Type" required />
                         </div>
                         <div>
                             <label className="text-xs font-semibold tracking-widest" htmlFor="price">Product Price</label><br />
-                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="text" name="price" id="price" placeholder="Product Price" required />
+                            <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="text" name="price" defaultValue={price} id="price" placeholder="Product Price" required />
                         </div>
                     </div>
 
@@ -106,7 +107,7 @@ const AddProduct = () => {
                                         name="rating-1"
                                         className="bg-[#EB0029] mask mask-star"
                                         value={star}
-                                        checked={star === rating}
+                                        checked={getrating ? (star === getrating) : (star === rating)}
                                         onChange={handleRatingChange}
                                     />
                                 ))}
@@ -115,13 +116,13 @@ const AddProduct = () => {
                     </div>
 
                     <label className="text-xs font-semibold tracking-widest" htmlFor="description">Short Description</label><br />
-                    <textarea className="mt-2 mb-10 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" id="description" placeholder="Short Description" rows="3" required></textarea>
+                    <textarea className="mt-2 mb-10 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" id="description" placeholder="Short Description" rows="3" defaultValue={description}></textarea>
 
-                    <input className="border w-full bg-[#EB0029] font-semibold tracking-widest text-xs py-3 text-white rounded-lg hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="ADD" />
+                    <input className="border w-full bg-[#EB0029] font-semibold tracking-widest text-xs py-3 text-white rounded-lg hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="UPDATE" />
                 </form>
             </div>
         </div>
     );
 };
 
-export default AddProduct;
+export default UpdateProd;

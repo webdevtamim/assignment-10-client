@@ -13,6 +13,7 @@ import MyCart from './components/MyCart/MyCart.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UpdateProd from './components/UpdateProd/UpdateProd.jsx'
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Details></Details></PrivateRoute>,
         loader: () => fetch('http://localhost:5000/products')
       },
+      {
+        path: '/update/:id',
+        element: <PrivateRoute><UpdateProd></UpdateProd></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+      }
     ]
   },
 ]);

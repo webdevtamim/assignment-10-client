@@ -41,7 +41,7 @@ const Products = (brandName) => {
                         </div>
                         <div className="card-actions justify-between">
                             <Link to={product._id}><button className="bg-[#EB0029] rounded-md text-sm text-white py-3 px-4">Details</button></Link>
-                            <Link to={product.name}><button className="bg-[#EB0029] rounded-md text-sm text-white py-3 px-4">Update</button></Link>
+                            <Link to={`/update/${product._id}`}><button className="bg-[#EB0029] rounded-md text-sm text-white py-3 px-4">Update</button></Link>
                         </div>
                     </div>
                 </div>)
