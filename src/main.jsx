@@ -9,6 +9,7 @@ import Register from './components/Register/Register.jsx'
 import AuthProvider from './providers/AuthProvider.jsx'
 import Login from './components/Login/Login.jsx'
 import Details from './components/Details/Details.jsx'
+import MyCart from './components/MyCart/MyCart.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -31,7 +32,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/myCart',
-        element: <h2>My Cart</h2>
+        element: <MyCart></MyCart>,
+        loader: () => fetch('http://localhost:5000/cart')
       },
       {
         path: '/register',
