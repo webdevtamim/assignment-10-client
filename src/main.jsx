@@ -8,6 +8,7 @@ import Category from './components/Category/Category.jsx'
 import Register from './components/Register/Register.jsx'
 import AuthProvider from './providers/AuthProvider.jsx'
 import Login from './components/Login/Login.jsx'
+import Details from './components/Details/Details.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
         path: '/:brandName',
         element: <Category></Category>,
         loader: () => fetch('../categories.json')
+      },
+      {
+        path: '/:brandName/:id',
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
+        loader: () => fetch('http://localhost:5000/products')
       },
     ]
   },

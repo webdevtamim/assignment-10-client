@@ -16,7 +16,7 @@ const Products = (brandName) => {
     return (
         <div className="grid lg:grid-cols-4 md:grid-cols-2 max-w-[1400px] gap-5 mx-auto px-5 pt-20 pb-40">
             {
-                brandProducts.map(product => <div className="card shadow-2xl bg-white text-[#010F1C]">
+                brandProducts.map(product => <div className="card shadow-2xl bg-white text-[#010F1C] items-end grid rounded-lg">
                     <figure className="pt-10"><img src={product.photo} alt="" /></figure>
                     <div className="card-body space-y-1">
                         <div className="flex justify-between">
