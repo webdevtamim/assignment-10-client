@@ -9,7 +9,6 @@ const CateSection = () => {
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
-    console.log(categories);
 
     return (
         <div className="max-w-[1000px] mx-auto">
