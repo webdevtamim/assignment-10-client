@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaGoogle } from 'react-icons/fa';
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/firebase.config";
@@ -11,13 +11,10 @@ const auth = getAuth(app);
 
 const Register = () => {
     const { createUser } = useContext(AuthContext)
-    const [registerError, setRegisterError] = useState([]);
 
     const provider = new GoogleAuthProvider();
 
     const handleGoogleRegister = () => {
-
-        setRegisterError('');
 
         signInWithPopup(auth, provider)
             .then(result => {
@@ -27,11 +24,15 @@ const Register = () => {
                     text: 'User created successfully',
                     icon: 'success',
                     confirmButtonText: 'Cool'
-                  })
+                })
             })
             .catch(error => {
-                console.error(error);
-                setRegisterError(error.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: `${error.code}`,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
             })
     }
 
@@ -41,8 +42,6 @@ const Register = () => {
         const email = form.get('email');
         const password = form.get('password');
 
-        setRegisterError('');
-
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
@@ -51,10 +50,15 @@ const Register = () => {
                     text: 'User created successfully',
                     icon: 'success',
                     confirmButtonText: 'Cool'
-                  })
+                })
             })
             .catch(error => {
-                setRegisterError(error.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: `${error.code}`,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
             })
     }
 
@@ -91,15 +95,12 @@ const Register = () => {
                         {
                             formDataSheet.map(formData => <div key={formData.id}>
                                 <label className="text-xs tracking-widest" htmlFor={formData.type}>{formData.placeholder}</label><br />
-                                <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type={formData.type} name={formData.type} id={formData.type} placeholder={formData.placeholder} />
+                                <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type={formData.type} name={formData.type} id={formData.type} placeholder={formData.placeholder} required />
                                 <br />
                             </div>)
                         }
-                        <input className="w-full bg-[#E2012D] font-semibold tracking-widest text-xs mt-4 py-3 text-white rounded-tr-full rounded-l-lg hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="Register" />
+                        <input className="w-full bg-[#E2012D] font-semibold tracking-widest text-xs mt-4 py-3 text-white rounded-xl hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="Register" />
                     </form>
-                    {
-                        registerError && <p className="text-red-600 pt-4">{registerError}</p>
-                    }
                     <div className='flex'>
                         <div className='border-b-2  w-[45%]'></div>
                         <p className="text-white text-center w-[10%] -mb-2  pt-5">OR</p>

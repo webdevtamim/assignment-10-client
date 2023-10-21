@@ -1,8 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../firebase/firebase.config";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2'
 
 const auth = getAuth(app);
 
@@ -15,15 +14,30 @@ const AuthProvider = ({ children }) => {
     const createUser = (email, password) => {
         setLoading(true)
         if (password.length < 6) {
-            toast("The password is less than 6 characters");
+            Swal.fire({
+                title: 'Oops!',
+                text: 'The password is less than 6 characters',
+                icon: 'warning',
+                confirmButtonText: 'Try again'
+            })
             return;
         }
         else if (!/[A-Z]/.test(password)) {
-            toast("The password don't have a capital letter");
+            Swal.fire({
+                title: 'Oops!',
+                text: "The password don't have a capital letter",
+                icon: 'warning',
+                confirmButtonText: 'Try again'
+            })
             return;
         }
         else if (!/[#?!@$%^&*-]/.test(password)) {
-            toast("The password don't have a special character");
+            Swal.fire({
+                title: 'Oops!',
+                text: "The password don't have a special character",
+                icon: 'warning',
+                confirmButtonText: 'Try again'
+            })
             return;
         }
         return createUserWithEmailAndPassword(auth, email, password)
@@ -44,7 +58,6 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={userInfo}>
             {children}
-            <ToastContainer />
         </AuthContext.Provider>
     );
 };

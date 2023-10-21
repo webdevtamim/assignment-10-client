@@ -1,77 +1,101 @@
 import { Link } from "react-router-dom";
 import { FaGoogle } from 'react-icons/fa';
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/firebase.config";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2'
 
 
 const auth = getAuth(app);
 
-const Register = () => {
+const Login = () => {
+    const { logIn } = useContext(AuthContext)
+
     const provider = new GoogleAuthProvider();
 
-    const handleGoogleSignUp = () => {
+    const handleGoogleLogin = () => {
+
         signInWithPopup(auth, provider)
             .then(result => {
                 console.log(result.user);
-                toast("User login successfully");
-    //             navigate(location?.state ? location.state : '/');
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'User login successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
             })
             .catch(error => {
-                console.error(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: `${error.code}`,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
             })
     }
 
-    const { login } = useContext(AuthContext)
-
-    const [registerError, setRegisterError] = useState([]);
-
-    const handlelogin = e => {
+    const handleLogin = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-
         const email = form.get('email');
         const password = form.get('password');
-        console.log(email, password);
 
-        setRegisterError('');
-
-        login(email, password)
+        logIn(email, password)
             .then(result => {
                 console.log(result.user);
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'User login successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
             })
             .catch(error => {
-                console.error(error);
-                setRegisterError(error.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: `${error.code}`,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
             })
     }
+
+    const formDataSheet = [
+        {
+            id: '1',
+            type: 'email',
+            placeholder: 'Email'
+        },
+        {
+            id: '2',
+            type: 'password',
+            placeholder: 'Password'
+        }
+    ]
 
     return (
         <div className="pb-20">
             <div className="max-w-[1400px] mx-auto px-5 md:px-0">
-                <div className="bg-[url('sign-bg.png')] bg-[length:120px_100px] md:bg-contain pt-20 pb-2 mb-16 bg-no-repeat bg-right-top space-y-4 md:max-w-[70%] mx-auto">
-                    <p className="text-base tracking-widest">Login Now!</p>
+                <div className="pt-20 pb-2 mb-16 md:max-w-[70%] mx-auto space-y-4">
+                    <p className="text-base tracking-widest">Login now!</p>
                     <div className="space-x-5">
-                        <span className="text-[#E2012D] md:text-5xl text-4xl font-semibold font-oswald">BRAND SHOP</span>
-                        <span className="md:text-5xl text-4xl font-semibold font-oswald">LOG IN</span>
+                        <span className="text-[#E2012D] md:text-5xl text-4xl font-semibold">BRAND SHOP</span>
+                        <span className="md:text-5xl text-4xl font-semibold">LOG IN</span>
                     </div>
                 </div>
                 <div className="p-10 border md:max-w-[70%] mx-auto shadow-xl">
-                    <form onSubmit={handlelogin}>
-                        <label className="text-xs font-semibold tracking-widest" htmlFor="emailField">Email</label><br />
-                        <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="email" name="email" id="emailField" placeholder="Email" required />
-                        <br />
-                        <label className="text-xs font-semibold tracking-widest" htmlFor="passField">Password</label><br />
-                        <input className="mt-2 mb-10 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type="password" name="password" id="passField" placeholder="Password" required />
-                        <br />
-                        <input className="w-full bg-[#E2012D] font-semibold tracking-widest text-xs py-3 text-white rounded-tr-full rounded-l-lg hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="Sign Up" />
+                    <form onSubmit={handleLogin}>
+                        {
+                            formDataSheet.map(formData => <div key={formData.id}>
+                                <label className="text-xs tracking-widest" htmlFor={formData.type}>{formData.placeholder}</label><br />
+                                <input className="mt-2 mb-6 w-full bg-white rounded border outline-none font-semibold border-[#7A7A7A] text tracking-widest text-xs py-3 px-4" type={formData.type} name={formData.type} id={formData.type} placeholder={formData.placeholder} required />
+                                <br />
+                            </div>)
+                        }
+                        <input className="w-full bg-[#E2012D] font-semibold tracking-widest text-xs mt-4 py-3 text-white rounded-xl hover:bg-white hover:text-[#091022] active:scale-x-90 duration-100" type="submit" value="Login" />
                     </form>
-                    {
-                        registerError && <p className="text-red-600 pt-4">{registerError}</p>
-                    }
                     <div className='flex'>
                         <div className='border-b-2  w-[45%]'></div>
                         <p className="text-white text-center w-[10%] -mb-2  pt-5">OR</p>
@@ -79,18 +103,17 @@ const Register = () => {
                     </div>
                     <div className="flex justify-center pt-10">
                         <button
-                            onClick={handleGoogleSignUp}
+                            onClick={handleGoogleLogin}
                             className='text-xl font-medium flex items-center gap-2 border rounded-md py-3 px-6 hover:text-[#091022] hover:bg-white active:text-[#E2012D] active:border-[#E2012D] active:bg-transparent'>
                             <span>Login with : </span>
                             <FaGoogle className='inline'></FaGoogle>
                         </button>
                     </div>
-                    <p className="text-white pt-4">All ready have an account? <Link to={'/register'}><span className="hover:underline underline-offset-4 font-bold">Regester</span></Link></p>
+                    <p className="text-white pt-4">New to this website? Please <Link to={'/register'}><span className="hover:underline underline-offset-4 font-bold">Register</span></Link></p>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 };
 
-export default Register;
+export default Login;
